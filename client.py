@@ -28,70 +28,74 @@ def main():
 		print 'Initiated connection with {0}:{1}!'.format(SERVER_ADD,RPORT)
 	else:
 		print 'Wrong protcol header!'
+		
+	try:
+		while 1:
+			direction = raw_input('Enter Direction [Straight,Back,Left,Right,Halt]:')
+			direction = direction.lower()[1]
+			if direction == 's':
+				direction = Movements.Straight
 
-	while 1:
-		direction = raw_input('Enter Direction [Straight,Back,Left,Right,Halt]:')
-		direction = direction.lower()[1]
-		if direction == 's':
-			direction = Movements.Straight
+			elif direction == 'b':
+				direction = Movements.Back
 
-		elif direction == 'b':
-			direction = Movements.Back
+			elif direction == 'l':
+				direction = Movements.Left
 
-		elif direction == 'l':
-			direction = Movements.Left
+			elif direction == 'r':
+				direction = Movements.Right
 
-		elif direction == 'r':
-			direction = Movements.Right
-
-		elif direction == 'h':
-			direction = Movements.Halt
-			
-		else:
-			print 'Invalid Input!'
-			continue
-
-		speed = '00'
-		if direction != 'h':
-			try:
-				speed = raw_input('Enter speed [25-100]')
-			except Exception, e:
+			elif direction == 'h':
+				direction = Movements.Halt
+				
+			else:
 				print 'Invalid Input!'
 				continue
 
-			if len(speed) > 3 or not 25 <= int(speed) <= 100:
-				print 'Invalid Input!'
-				continue
+			speed = '00'
+			if direction != 'h':
+				try:
+					speed = raw_input('Enter speed [25-100]')
+				except Exception, e:
+					print 'Invalid Input!'
+					continue
 
-		next_header = Client.Move
-		should_close = raw_input('Do you want to close the connection? [N/Y]')
-		if should_close.lower()[1] == 'y':
-			next_header = Client.KTHXBYE
+				if len(speed) > 3 or not 25 <= int(speed) <= 100:
+					print 'Invalid Input!'
+					continue
 
-		err = s.send(next_header + direction+' ' + speed)
-		if err !=5:
-			print 'ERROR! while sending movement message'
-			s.close()
-			return
+			next_header = Client.Move
+			should_close = raw_input('Do you want to close the connection? [N/Y]')
+			if should_close.lower()[1] == 'y':
+				next_header = Client.KTHXBYE
 
-		data = s.recv(BUFSIZE)
-		message_type = data[:3]
-		data = data[3:]
+			err = s.send(next_header + direction+' ' + speed)
+			if err !=5:
+				print 'ERROR! while sending movement message'
+				s.close()
+				return
 
-		if message_type == Server.ERROR:
-			print 'Car got an error: {0}'.format(data)
+			data = s.recv(BUFSIZE)
+			message_type = data[:3]
+			data = data[3:]
 
-		elif message_type == Server.MOVED:
-			print 'Car Says: {0}'.format(data)
+			if message_type == Server.ERROR:
+				print 'Car got an error: {0}'.format(data)
 
-		elif message_type == Server.Close:
-			print 'BYE!'
-			s.close()
-			break
+			elif message_type == Server.MOVED:
+				print 'Car Says: {0}'.format(data)
 
-		else:
-			print 'Wrong protcol header!'
+			elif message_type == Server.Close:
+				print 'BYE!'
+				s.close()
+				break
 
+			else:
+				print 'Wrong protcol header!'
+
+	except KeyboardInterrupt, e:
+		s.close()
+	return
 
 if __name__ == '__main__':
 	main()
