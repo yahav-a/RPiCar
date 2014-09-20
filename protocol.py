@@ -1,26 +1,18 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-class Client:
+Client=\
+	{
+		'INIT_HEY' : 100,
+		'INIT_DONE': 110,
+		'MOVE'	   : 200,
+		'KTHXBYE'  : 300
+	}
 
-# Messages
-	INIT_HEY  = 100
-	MOVE	  = 200
-	KTHXBYE   = 300
-
-class Server:
-
-# Message
-	INIT_OK  = 105
-	MOVED	 = 205
-	ERROR	 = 204
-	CLOSE	 = 305
-
-
-class Movements:
-
-	Straight = 11
-	Back 	 = 10
-	Left 	 = 01
-	Right 	 = 10
-	Stop 	 = 12
+Server=\
+	{
+		'INIT_OK' : 105,
+		'MOVED'	  : 205,
+		'ERROR'	  : 204,
+		'CLOSE'	  : 305
+	}
