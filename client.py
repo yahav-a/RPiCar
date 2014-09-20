@@ -5,12 +5,16 @@ import socket
 from protocol import *
 
 RPORT = 1337
-SERVER_ADD = '127.0.0.1'
+SERVER_ADDR = '127.0.0.1'
 
 def main():
+	global SERVER_ADDR
+	addr = raw_input('Enter the IP of the server[default {0}]: '.format(SERVER_ADDR))
+	if addr:
+		SERVER_ADDR = addr
 	s = socket.socket()
 	try:
-		s.connect((SERVER_ADD,RPORT))
+		s.connect((SERVER_ADDR,RPORT))
 	except Exception, e:
 		print e
 		return
@@ -25,14 +29,14 @@ def main():
 	message_type = data[:3]
 
 	if message_type == Server.INIT_OK:
-		print 'Initiated connection with {0}:{1}!'.format(SERVER_ADD,RPORT)
+		print 'Initiated connection with {0}:{1}!'.format(SERVER_ADDR,RPORT)
 	else:
 		print 'Wrong protcol header!'
-		
+
 	try:
 		while 1:
 			direction = raw_input('Enter Direction [Straight,Back,Left,Right,Halt]:')
-			direction = direction.lower()[1]
+			direction = direction.lower()[0]
 			if direction == 's':
 				direction = Movements.Straight
 
@@ -55,7 +59,7 @@ def main():
 			speed = '00'
 			if direction != 'h':
 				try:
-					speed = raw_input('Enter speed [25-100]')
+					speed = raw_input('Enter speed [25-100]: ')
 				except Exception, e:
 					print 'Invalid Input!'
 					continue
@@ -64,18 +68,22 @@ def main():
 					print 'Invalid Input!'
 					continue
 
-			next_header = Client.Move
-			should_close = raw_input('Do you want to close the connection? [N/Y]')
-			if should_close.lower()[1] == 'y':
+			next_header = Client.MOVE
+			should_close = raw_input('Do you want to close the connection? [Y/N]: ')
+			if should_close.lower()[0] == 'y':
 				next_header = Client.KTHXBYE
 
 			err = s.send(next_header + direction+' ' + speed)
-			if err !=5:
+			if err not in [8,9]:
 				print 'ERROR! while sending movement message'
 				s.close()
 				return
 
-			data = s.recv(BUFSIZE)
+			data = s.recv(BUFFER_SIZE)
+			if not data:
+				print 'EMPTY!'
+				continue
+
 			message_type = data[:3]
 			data = data[3:]
 
@@ -85,7 +93,7 @@ def main():
 			elif message_type == Server.MOVED:
 				print 'Car Says: {0}'.format(data)
 
-			elif message_type == Server.Close:
+			elif message_type == Server.CLOSE:
 				print 'BYE!'
 				s.close()
 				break
