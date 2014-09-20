@@ -23,19 +23,19 @@ try:
 		speed = int(formattedData[1])
 		response = Server.MOVED + ": "
 		if action == Movements.Straight:
-			goStraight(speed)
+			#goStraight(speed)
 			response += "Moved Straight"
 		elif action == Movements.Back:
-			goBack(speed)
+			#goBack(speed)
 			response += "Moved Back"
 		elif action == Movements.Right:
-			turnRight(speed)
+			#turnRight(speed)
 			response += "Turned Right"
 		elif action == Movements.Left:
-			turnLeft(speed)
+			#turnLeft(speed)
 			response += "Turned Left"
 		elif action == Movements.Halt:
-			stop()
+			#stop()
 			response += "Stopped"
 		elif action == Client.KTHXBYE:
 			conn.send(Server.CLOSE)
