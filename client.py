@@ -27,7 +27,7 @@ def main():
 	if message_type == Server.INIT_OK:
 		print 'Initiated connection with {0}:{1}!'.format(SERVER_ADD,RPORT)
 	else:
-		'Wrong protcol header!'
+		print 'Wrong protcol header!'
 
 	while 1:
 		direction = raw_input('Enter Direction [Straight,Back,Left,Right,Halt]:')
@@ -80,7 +80,6 @@ def main():
 
 		if message_type == Server.ERROR:
 			print 'Car got an error: {0}'.format(data)
-			continue
 
 		elif message_type == Server.MOVED:
 			print 'Car Says: {0}'.format(data)
@@ -91,8 +90,7 @@ def main():
 			break
 
 		else:
-			print 'Wrong header!'
-			continue
+			print 'Wrong protcol header!'
 
 
 if __name__ == '__main__':
