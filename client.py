@@ -8,6 +8,7 @@ RPORT = 1337
 SERVER_ADDR = '127.0.0.1'
 
 def main():
+	global SERVER_ADDR
 	addr = raw_input('Enter the IP of the server[default {0}]: '.format(SERVER_ADDR))
 	if addr:
 		SERVER_ADDR = addr
