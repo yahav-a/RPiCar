@@ -5,12 +5,15 @@ import socket
 from protocol import *
 
 RPORT = 1337
-SERVER_ADD = '127.0.0.1'
+SERVER_ADDR = '127.0.0.1'
 
 def main():
+	addr = raw_input('Enter the IP of the server[default {0}]: '.format(SERVER_ADDR))
+	if addr:
+		SERVER_ADDR = addr
 	s = socket.socket()
 	try:
-		s.connect((SERVER_ADD,RPORT))
+		s.connect((SERVER_ADDR,RPORT))
 	except Exception, e:
 		print e
 		return
@@ -25,7 +28,7 @@ def main():
 	message_type = data[:3]
 
 	if message_type == Server.INIT_OK:
-		print 'Initiated connection with {0}:{1}!'.format(SERVER_ADD,RPORT)
+		print 'Initiated connection with {0}:{1}!'.format(SERVER_ADDR,RPORT)
 	else:
 		print 'Wrong protcol header!'
 
@@ -79,7 +82,7 @@ def main():
 			if not data:
 				print 'EMPTY!'
 				continue
-				
+
 			message_type = data[:3]
 			data = data[3:]
 
