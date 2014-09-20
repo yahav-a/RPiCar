@@ -4,7 +4,6 @@ import socket
 
 TCP_IP = '192.168.100.109'
 TCP_PORT = 1337
-BUFFER_SIZE = 128
 print("Configuring connection")
 s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
 s.bind((TCP_IP,TCP_PORT))
@@ -20,6 +19,9 @@ try:
 		print("Data received: "+data)
 		if data[:3] == Client.INIT_HEY:
 			conn.send(Server.INIT_OK.encode())
+		elif data[:3] == Client.KTHXBYE:
+			conn.send(Server.CLOSE.encode())
+			exitAndClean()
 		else:
 			data = data[3:]
 			formattedData = data.split(" ")
@@ -27,23 +29,20 @@ try:
 			speed = int(formattedData[1])
 			response = Server.MOVED + ": "
 			if action == Movements.Straight:
-				#goStraight(speed)
+				goStraight(speed)
 				response += "Moved Straight"
 			elif action == Movements.Back:
-				#goBack(speed)
+				goBack(speed)
 				response += "Moved Back"
 			elif action == Movements.Right:
-				#turnRight(speed)
+				turnRight(speed)
 				response += "Turned Right"
 			elif action == Movements.Left:
-				#turnLeft(speed)
+				turnLeft(speed)
 				response += "Turned Left"
 			elif action == Movements.Halt:
-				#stop()
+				stop()
 				response += "Stopped"
-			elif action == Client.KTHXBYE:
-				conn.send(Server.CLOSE.encode())
-				exitAndClean()
 			conn.send(response.encode())
 	conn.send(Server.CLOSE.encode())
 	exitAndClean()
