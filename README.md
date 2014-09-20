@@ -1,4 +1,4 @@
 RPiCar
 ======
 
-Raspberry Pi remote Car controlling 
+remote control interface for a Raspberry Pi based car.
