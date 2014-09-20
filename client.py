@@ -55,7 +55,7 @@ def main():
 			speed = '00'
 			if direction != 'h':
 				try:
-					speed = raw_input('Enter speed [25-100]')
+					speed = raw_input('Enter speed [25-100]: ')
 				except Exception, e:
 					print 'Invalid Input!'
 					continue
@@ -65,8 +65,8 @@ def main():
 					continue
 
 			next_header = Client.MOVE
-			should_close = raw_input('Do you want to close the connection? [N/Y]')
-			if should_close.lower()[1] == 'y':
+			should_close = raw_input('Do you want to close the connection? [Y/N]: ')
+			if should_close.lower()[0] == 'y':
 				next_header = Client.KTHXBYE
 
 			err = s.send(next_header + direction+' ' + speed)
