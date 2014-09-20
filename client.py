@@ -70,12 +70,16 @@ def main():
 				next_header = Client.KTHXBYE
 
 			err = s.send(next_header + direction+' ' + speed)
-			if err !=5:
+			if err not in [8,9]:
 				print 'ERROR! while sending movement message'
 				s.close()
 				return
 
-			data = s.recv(BUFSIZE)
+			data = s.recv(BUFFER_SIZE)
+			if not data:
+				print 'EMPTY!'
+				continue
+				
 			message_type = data[:3]
 			data = data[3:]
 
@@ -85,7 +89,7 @@ def main():
 			elif message_type == Server.MOVED:
 				print 'Car Says: {0}'.format(data)
 
-			elif message_type == Server.Close:
+			elif message_type == Server.CLOSE:
 				print 'BYE!'
 				s.close()
 				break
