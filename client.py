@@ -87,6 +87,8 @@ def main():
 
 		elif message_type == Server.Close:
 			print 'BYE!'
+			s.close()
+			break
 
 		else:
 			print 'Wrong header!'
