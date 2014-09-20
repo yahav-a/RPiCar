@@ -5,14 +5,22 @@ BUFFER_SIZE = 128
 
 class Client:
 
+	""" 
+		Client message codes for controlling the car
+	"""
+
 # Messages
 	INIT_HEY  = '100'
 	MOVE	  = '200'
 	KTHXBYE   = '300'
 
 class Server:
+	
+	""" 
+		Server message codes for controlling the car
+	"""
 
-# Message
+# Messages
 	INIT_OK  = '105'
 	MOVED	 = '205'
 	ERROR	 = '204'
@@ -20,6 +28,10 @@ class Server:
 
 
 class Movements:
+	
+	""" 
+		possible movements for the car
+	"""
 
 	Straight = '11'
 	Back 	 = '10'
