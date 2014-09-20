@@ -1,4 +1,4 @@
-import protocol
+from protocol import *
 from MotorController import *
 import socket
 
@@ -13,7 +13,8 @@ try:
 	s.listen(1)
 	
 	conn,addr = s.accept()
-	print("Connected to: " + addr)
+	conn.send(Server.INIT_OK)
+	print("Connected to: " + str(addr[0]) + str(addr[1]))
 	while 1:
 		data = conn.recv(BUFFER_SIZE)
 		if not data: break
