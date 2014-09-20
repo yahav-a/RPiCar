@@ -64,7 +64,7 @@ def main():
 					print 'Invalid Input!'
 					continue
 
-			next_header = Client.Move
+			next_header = Client.MOVE
 			should_close = raw_input('Do you want to close the connection? [N/Y]')
 			if should_close.lower()[1] == 'y':
 				next_header = Client.KTHXBYE
