@@ -36,6 +36,8 @@ def main():
 	try:
 		while 1:
 			direction = raw_input('Enter Direction [Straight,Back,Left,Right,Halt]:')
+			while(direction == ""):
+				direction = raw_input('Enter Direction [Straight,Back,Left,Right,Halt]:')
 			direction = direction.lower()[0]
 			if direction == 's':
 				direction = Movements.Straight
