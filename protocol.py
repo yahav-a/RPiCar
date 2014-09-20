@@ -34,7 +34,7 @@ class Movements:
 	"""
 
 	Straight = '11'
-	Back 	 = '10'
+	Back 	 = '00'
 	Left 	 = '01'
 	Right 	 = '10'
 	Halt 	 = '12'
