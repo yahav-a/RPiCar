@@ -28,11 +28,11 @@ def main():
 		print 'Initiated connection with {0}:{1}!'.format(SERVER_ADD,RPORT)
 	else:
 		print 'Wrong protcol header!'
-		
+
 	try:
 		while 1:
 			direction = raw_input('Enter Direction [Straight,Back,Left,Right,Halt]:')
-			direction = direction.lower()[1]
+			direction = direction.lower()[0]
 			if direction == 's':
 				direction = Movements.Straight
 
