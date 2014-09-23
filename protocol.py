@@ -13,6 +13,8 @@ class Client:
 	INIT_HEY  = '100'
 	MOVE	  = '200'
 	KTHXBYE   = '300'
+	CUSTOM_MOVE = '400'
+#CUSTOME_MOVE = 400,direction[f,b],left,right
 
 class Server:
 	

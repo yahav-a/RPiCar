@@ -18,21 +18,27 @@ def goStraight(speed):
 	GPIO.output(Motor1B, GPIO.LOW)
 	GPIO.output(Motor2A, GPIO.HIGH)
 	GPIO.output(Motor2B, GPIO.LOW)
-	motor1.ChangeDutyCycle(speed)
-	motor2.ChangeDutyCycle(speed)
+	motorR.ChangeDutyCycle(speed)
+	motorL.ChangeDutyCycle(speed)
 
 def stop():
 	print("Stoping")
-	motor1.ChangeDutyCycle(0)
-	motor2.ChangeDutyCycle(0)
+	motorR.ChangeDutyCycle(0)
+	motorL.ChangeDutyCycle(0)
 
 def exitAndClean():
 	print("Exiting")
-	motor1.stop()
-	motor2.stop()
+	motorR.stop()
+	motorL.stop()
 	GPIO.cleanup()
 	exit()
 
+def cleanNoExit():
+	print("Exiting")
+	motorR.stop()
+	motorL.stop()
+	GPIO.cleanup()
+	
 def goBack(speed):
 	speed = checkSpeed(speed)
 	print("Going back with speed: "+str(speed))
@@ -40,8 +46,8 @@ def goBack(speed):
 	GPIO.output(Motor1B, GPIO.HIGH)
 	GPIO.output(Motor2A, GPIO.LOW)
 	GPIO.output(Motor2B, GPIO.HIGH)
-	motor1.ChangeDutyCycle(speed)
-	motor2.ChangeDutyCycle(speed)
+	motorR.ChangeDutyCycle(speed)
+	motorL.ChangeDutyCycle(speed)
 
 def turnRight(speed):
 	speed = checkSpeed(speed)
@@ -50,8 +56,8 @@ def turnRight(speed):
 	GPIO.output(Motor1B, GPIO.LOW)
 	GPIO.output(Motor2A, GPIO.HIGH)
 	GPIO.output(Motor2B, GPIO.LOW)
-	motor1.ChangeDutyCycle(speed/3)
-	motor2.ChangeDutyCycle(speed)
+	motorR.ChangeDutyCycle(speed/3)
+	motorL.ChangeDutyCycle(speed)
 
 def turnLeft(speed):
 	speed = checkSpeed(speed)
@@ -60,10 +66,30 @@ def turnLeft(speed):
 	GPIO.output(Motor1B, GPIO.LOW)
 	GPIO.output(Motor2A, GPIO.HIGH)
 	GPIO.output(Motor2B, GPIO.LOW)
-	motor1.ChangeDutyCycle(speed)
-	motor2.ChangeDutyCycle(speed/3)
+	motorR.ChangeDutyCycle(speed)
+	motorL.ChangeDutyCycle(speed/3)
 
-
+def customSpeed(direction,left, right):
+	ans = "Going "+"Forward" if direction == "f" else "Back" +". Left: "+str(left)+". Right: "+str(right)
+	print(ans)
+	right = float(right)
+	left = float(left)
+	if direction == "f":
+		#Forward
+		GPIO.output(Motor1A, GPIO.HIGH)
+		GPIO.output(Motor1B, GPIO.LOW)
+		GPIO.output(Motor2A, GPIO.HIGH)
+		GPIO.output(Motor2B, GPIO.LOW)
+		motorR.ChangeDutyCycle(right)
+		motorL.ChangeDutyCycle(left)
+	else:
+		#Back
+		GPIO.output(Motor1A, GPIO.LOW)
+		GPIO.output(Motor1B, GPIO.HIGH)
+		GPIO.output(Motor2A, GPIO.LOW)
+		GPIO.output(Motor2B, GPIO.HIGH)
+		motorR.ChangeDutyCycle(right)
+		motorL.ChangeDutyCycle(left)
 
 GPIO.setmode(GPIO.BOARD)
 Motor1A = 16
@@ -83,8 +109,8 @@ GPIO.setup(Motor2B, GPIO.OUT)
 GPIO.setup(Motor2E, GPIO.OUT)
 
 print("Warming up engines")
-motor1 = GPIO.PWM(Motor1E,100)
-motor2 = GPIO.PWM(Motor2E,100)
+motorR = GPIO.PWM(Motor1E,100)
+motorL = GPIO.PWM(Motor2E,100)
 print("Starting motors")
-motor1.start(0)
-motor2.start(0)
+motorR.start(0)
+motorL.start(0)
