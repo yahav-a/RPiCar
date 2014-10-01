@@ -1,11 +1,11 @@
 from multiprocessing import Lock
 import sys
 from protocol import *
-#from MotorController import *
+from MotorController import *
 import socket
 def StartTCPServer(lock):
 	l = lock
-	TCP_IP = '192.168.100.107'
+	TCP_IP = '0.0.0.0'
 	TCP_PORT = 1337
 	print("Starting TCP Server on {0}:{1}".format(TCP_IP,TCP_PORT))
 	print("Configuring connection")
@@ -34,9 +34,9 @@ def StartTCPServer(lock):
 				left = formattedData[2]
 				right = formattedData[3]
 				response = "URRAY"
-				l.aquire()
-				#response = customSpeed(direction,left,right)
-				l.release()
+				#l.aquire()
+				response = customSpeed(direction,left,right)
+				#l.release()
 				conn.send((str(response)+"\n").encode())
 			else:
 				data = data[3:]
@@ -67,4 +67,4 @@ def StartTCPServer(lock):
 		print("Error happened:",sys.exc_info())
 	finally:
 		s.close()
-		#exitAndClean()
+		exitAndClean()

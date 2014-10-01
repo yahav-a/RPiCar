@@ -24,8 +24,8 @@ def MoveMotor(data,lock):
 def StartIRServer(lock):
 	#some waiting for data ...
 	data = "somedatahere,dsa,dsa,dsa" #delete this!!!
-	while 1:
-		print("IR: here will be a while:true loop for IR")
-		sleep(2)
+	#while 1:
+	#	print("IR: here will be a while:true loop for IR")
+	#	sleep(2)
 	if data[:3] == Client.CUSTOM_MOVE:
 		MoveMotor(data,lock)
