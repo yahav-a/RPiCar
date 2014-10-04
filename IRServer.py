@@ -3,8 +3,8 @@
 from multiprocessing import Lock
 from protocol import *
 from time import sleep
-print("This is the IR Server!")
-print("I'll have to do it in the RPi..")
+#print("This is the IR Server!")
+#print("I'll have to do it in the RPi..")
 
 def MoveMotor(data,lock):
 	formattedData = data.split(",")

@@ -1,0 +1,81 @@
+This is the IR Server!
+I'll have to do it in the RPi..
+Setting up GPIO pins
+Warming up engines
+Starting motors
+Got to forward
+Going Forward. Left: 100. Right: 100
+Got to back
+Going Back. Left: 100. Right: 100
+Starting TCP Server on 0.0.0.0:1337
+Configuring connection
+Waiting for connection
+Connected to: 192.168.100.103:50785
+Data received: 100
+Initiallizing connection
+Connection initiallized
+Data received: 400,b,100,30
+Got to back
+Going Back. Left: 100. Right: 30
+Data received: 400,f,100,65
+Got to forward
+Going Forward. Left: 100. Right: 65
+Data received: 400,f,100,100
+Got to forward
+Going Forward. Left: 100. Right: 100
+Data received: 400,f,73,73
+Got to forward
+Going Forward. Left: 73. Right: 73
+Data received: 400,b,98,98
+Got to back
+Going Back. Left: 98. Right: 98
+Data received: 400,b,55,46
+Got to back
+Going Back. Left: 55. Right: 46
+Data received: 400,f,89,89
+Got to forward
+Going Forward. Left: 89. Right: 89
+Data received: 400,f,100,100
+Got to forward
+Going Forward. Left: 100. Right: 100
+Data received: 400,f,70,100
+Got to forward
+Going Forward. Left: 70. Right: 100
+Data received: 400,f,50,100
+Got to forward
+Going Forward. Left: 50. Right: 100
+Data received: 400,f,100,59
+Got to forward
+Going Forward. Left: 100. Right: 59
+Data received: 400,f,100,49
+Got to forward
+Going Forward. Left: 100. Right: 49
+Data received: 400,f,0,0
+Got to forward
+Going Forward. Left: 0. Right: 0
+Data received: 400,b,95,46
+Got to back
+Going Back. Left: 95. Right: 46
+Data received: 400,b,100,80
+Got to back
+Going Back. Left: 100. Right: 80
+Data received: 400,b,100,100
+Got to back
+Going Back. Left: 100. Right: 100
+Data received: 400,f,81,42
+Got to forward
+Going Forward. Left: 81. Right: 42
+Data received: 400,f,100,100
+Got to forward
+Going Forward. Left: 100. Right: 100
+Data received: 400,f,90,100
+Got to forward
+Going Forward. Left: 90. Right: 100
+Data received: 400,f,70,100
+Got to forward
+Going Forward. Left: 70. Right: 100
+Data received: 400,f,0,0
+Got to forward
+Going Forward. Left: 0. Right: 0
+Data received: 300
+Exiting

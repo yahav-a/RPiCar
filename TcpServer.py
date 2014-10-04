@@ -1,7 +1,7 @@
-from multiprocessing import Lock
+from multiprocessing import Process
 import sys
 from protocol import *
-from MotorController import *
+from MotorControllerP import *
 import socket
 def StartTCPServer(lock):
 	l = lock
@@ -24,19 +24,19 @@ def StartTCPServer(lock):
 			if data[:3] == Client.INIT_HEY:
 				print("Initiallizing connection")
 				conn.send((Server.INIT_OK+"\n").encode())
-				print("Connection initiallized")
+				#print("Connection initiallized")
 			elif data[:3] == Client.KTHXBYE:
 				conn.send(Server.CLOSE.encode())
 				#exitAndClean()
 			elif data[:3] == Client.CUSTOM_MOVE:
+				data = str(data)
 				formattedData = data.split(",")
 				direction = formattedData[1]
 				left = formattedData[2]
 				right = formattedData[3]
 				response = "URRAY"
-				#l.aquire()
 				response = customSpeed(direction,left,right)
-				#l.release()
+				print(direction+","+left+","+right)
 				conn.send((str(response)+"\n").encode())
 			else:
 				data = data[3:]

@@ -78,7 +78,7 @@ def customSpeed(direction,left, right):
 		GPIO.output(Motor2B, GPIO.LOW)
 		motorR.ChangeDutyCycle(right)
 		motorL.ChangeDutyCycle(left)
-		print("Got to forward")
+		#print("Got to forward")
 	else:
 		GPIO.output(Motor1A, GPIO.LOW)
 		GPIO.output(Motor1B, GPIO.HIGH)
@@ -86,9 +86,9 @@ def customSpeed(direction,left, right):
 		GPIO.output(Motor2B, GPIO.HIGH)
 		motorR.ChangeDutyCycle(right)
 		motorL.ChangeDutyCycle(left)
-		print("Got to back")
+		#print("Got to back")
 	ans = "Going "+ ("Forward" if direction == "f" else "Back") +". Left: "+str(left)+". Right: "+str(right)
-	print(ans)
+	#print(ans)
 
 
 GPIO.setmode(GPIO.BOARD)
@@ -100,7 +100,7 @@ Motor2A = 19
 Motor2B = 21
 Motor2E = 23
 
-print("Setting up GPIO pins")
+#print("Setting up GPIO pins")
 GPIO.setup(Motor1A, GPIO.OUT)
 GPIO.setup(Motor1B, GPIO.OUT)
 GPIO.setup(Motor1E, GPIO.OUT)
@@ -108,13 +108,16 @@ GPIO.setup(Motor2A, GPIO.OUT)
 GPIO.setup(Motor2B, GPIO.OUT)
 GPIO.setup(Motor2E, GPIO.OUT)
 
-print("Warming up engines")
+#print("Warming up engines")
 motorR = GPIO.PWM(Motor1E,100)
 motorL = GPIO.PWM(Motor2E,100)
-print("Starting motors")
+#print("Starting motors")
 motorR.start(0)
 motorL.start(0)
 '''
+customSpeed("f",100,100)
+sleep(1)
+customSpeed("b",100,100)
 print("10%")
 motorR.ChangeDutyCycle(10)
 motorL.ChangeDutyCycle(10)
