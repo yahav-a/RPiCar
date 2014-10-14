@@ -1,4 +1,5 @@
 import pigpio
+import subprocess
 from time import sleep
 
 def exitAndClean():
@@ -7,13 +8,6 @@ def exitAndClean():
 	pi.write(Motor2E,pigpio.LOW)
 	pi.stop()
 	exit()
-
-def cleanNoExit():
-	print("Exiting")
-	pi.write(Motor1E,pigpio.LOW)
-	pi.write(Motor2E,pigpio.LOW)
-	pi.stop()
-	GPIO.cleanup()
 
 def customSpeed(direction,left, right):
 	right = int(right)

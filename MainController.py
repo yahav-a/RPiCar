@@ -15,6 +15,6 @@ if __name__ == '__main__':
 	irProcess = Process(target=StartIRServer, args=(lock,))
 	tcpProcess = Process(target=StartTCPServer,args=(lock,))
 	mainProcess = Process(target=mainProcessFunc)
-	irProcess.start()
+	#irProcess.start()
 	tcpProcess.start()
 	#mainProcess.start()

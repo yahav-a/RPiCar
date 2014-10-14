@@ -4,6 +4,8 @@ from protocol import *
 from MotorControllerP import *
 import socket
 def StartTCPServer(lock):
+	userAddress = ""
+	firstConn = 1
 	l = lock
 	TCP_IP = '0.0.0.0'
 	TCP_PORT = 1337
@@ -15,51 +17,37 @@ def StartTCPServer(lock):
 	try:
 		s.listen(1)
 		conn,addr = s.accept()
+		if firstConn == 1:
+			userAddress = str(addr[0])
+			firstConn = 0
 		print("Connected to: " + str(addr[0]) +":"+ str(addr[1]))
 		while 1:
-			data = conn.recv(BUFFER_SIZE)
-			if not data: break
-			data = data.decode()
-			print("Data received: "+data)
-			if data[:3] == Client.INIT_HEY:
-				print("Initiallizing connection")
-				conn.send((Server.INIT_OK+"\n").encode())
-				#print("Connection initiallized")
-			elif data[:3] == Client.KTHXBYE:
-				conn.send(Server.CLOSE.encode())
-				#exitAndClean()
-			elif data[:3] == Client.CUSTOM_MOVE:
-				data = str(data)
-				formattedData = data.split(",")
-				direction = formattedData[1]
-				left = formattedData[2]
-				right = formattedData[3]
-				response = "URRAY"
-				response = customSpeed(direction,left,right)
-				print(direction+","+left+","+right)
-				conn.send((str(response)+"\n").encode())
+			if(userAddress == str(addr[0]):
+				data = conn.recv(BUFFER_SIZE)
+				if not data: break
+				data = data.decode()
+				print("Data received: "+data)
+				if data[:3] == Client.INIT_HEY:
+					print("Initiallizing connection")
+					conn.send((Server.INIT_OK+"\n").encode())
+					print("Connection initiallized")
+				elif data[:3] == Client.KTHXBYE:
+					conn.send(Server.CLOSE.encode())
+					exitAndClean()
+				elif data[:3] == Client.CUSTOM_MOVE:
+					data = str(data)
+					formattedData = data.split(",")
+					direction = formattedData[1]
+					left = formattedData[2]
+					right = formattedData[3]
+					response = "URRAY"
+					response = customSpeed(direction,left,right)
+					print(direction+","+left+","+right)
+					conn.send((str(response)+"\n").encode())
+				else:
+					print("Command not understood: "+data)
 			else:
-				data = data[3:]
-				formattedData = data.split(" ")
-				action = formattedData[0]
-				speed = int(formattedData[1])
-				response = Server.MOVED + ": "
-				if action == Movements.Straight:
-					#goStraight(speed)
-					response += "Moved Straight"
-				elif action == Movements.Back:
-					#goBack(speed)
-					response += "Moved Back"
-				elif action == Movements.Right:
-					#turnRight(speed)
-					response += "Turned Right"
-				elif action == Movements.Left:
-					#turnLeft(speed)
-					response += "Turned Left"
-				elif action == Movements.Halt:
-					#stop()
-					response += "Stopped"
-				conn.send(response.encode())
+				print("Somebody else was trying to connect!!")
 		conn.send(Server.CLOSE.encode())
 	except KeyboardInterrupt:
 		print("Rage Quit")
