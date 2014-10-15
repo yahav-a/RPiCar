@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="hello">Hello World, main!</string>
+    <string name="app_name">RPi Car Controller</string>
+    <string name="title_activity_main">Car Controller</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <string name="ipText">Please enter IP/BT Address</string>
+    <string name="ipHint">192.168.100.103</string>
+    <string name="start">Start!</string>
+    <string name="closeConn">Close Connection</string>
+    <string name="noConnStart">Start without connection</string>
+    <string name="tcpStart">Start with TCP</string>
+    <string name="startBT">Start with BT</string>
+
+</resources>

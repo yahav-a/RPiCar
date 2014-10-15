@@ -1,0 +1,72 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/mainLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context=".MainActivity" >
+
+        <Button
+            android:id="@+id/noConn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/closeConn"
+            android:layout_alignRight="@+id/closeConn"
+            android:layout_below="@+id/closeConn"
+            android:text="@string/noConnStart" />
+
+        <Button
+            android:id="@+id/startBT"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/closeConn"
+            android:layout_alignRight="@+id/closeConn"
+            android:text="@string/startBT" />
+
+        <Button
+            android:id="@+id/closeConn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/startButton"
+            android:text="@string/closeConn" />
+
+        <Button
+            android:id="@+id/startButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignLeft="@+id/closeConn"
+            android:layout_centerVertical="true"
+            android:text="@string/tcpStart" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/ipInput"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentRight="true"
+            android:layout_marginBottom="39dp"
+            android:gravity="center"
+            android:text="@string/ipText"
+            android:textAppearance="?android:attr/textAppearanceLarge" />
+
+        <EditText
+            android:id="@+id/ipInput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_above="@+id/startBT"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="59dp"
+            android:ems="10"
+            android:hint="@string/ipHint"
+            android:text="@string/ipHint" >
+
+            <requestFocus />
+        </EditText>
+
+</RelativeLayout>
